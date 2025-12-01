@@ -44,7 +44,7 @@ def parse_df(df):
     ym_col = next((c for c in df.columns if "year" in c.lower() or "ym" in c.lower() or c=="월"), None)
     if ym_col:
         ym = pd.to_datetime(df[ym_col], errors="coerce", infer_datetime_format=True)
-        df["year_month"] = ym.dt.to_period("M").dt.to_timestamp("start")
+        df["year_month"] = pd.to_datetime(df["year_month"], format="%Y_%m")
     return df
 
 
